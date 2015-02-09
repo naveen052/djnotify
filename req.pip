@@ -1,0 +1,4 @@
+django==1.7.4
+pymongo==2.8
+mongoengine==0.8.0
+ipython==2.4

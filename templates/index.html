@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+</head>
+<body>
+
+    {% for post in posts %}
+
+        <div style="margin: 20px auto;padding: 20px 10px; border-bottom: 1px
+        solid #ddd;">
+            <strong>Title : </strong>{{ post.post_title }}<br>
+            <strong>Body : </strong>{{ post.post_body }}<br>
+            <strong>Youtube </strong>{{ post.youtube_link }}<br>
+            <strong>Created at : </strong> {{ post.created }}
+        </div>
+
+    {% endfor %}
+</body>
+</html>
