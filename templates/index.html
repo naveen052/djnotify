@@ -8,32 +8,35 @@
 </head>
 <body>
 
-    {% for post in posts %}
 
-        <div class="container" style="margin: 20px auto;padding: 20px 10px;
-        border-bottom: 1px
-        solid #ddd;">
-        <div class="form-group">
-            <select class="form-control" id="select">
-                {% for user in all_users %}
-                  <option>{{ user.username }}</option>
-                {% endfor %}
-            </select>
-        </div>
-            <h2>{{ post.post_title }}</h2>
-            <p>{{ post.post_body }}</p>
-            <p><strong>
+    <div class="container">
+        <table class="table table-striped table-hover ">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Title</th>
+              <th>Body</th>
+              <th>Youtube Link</th>
+              <th>Edit</th>
+            </tr>
+          </thead>
+          <tbody>
+          {% for post in posts %}
+            <tr>
+                <td>{{ post.created }}</td>
+                <td>{{ post.post_title }}</td>
+                <td>{{ post.post_body }}</td>
                 {% if post.youtube_link %}
-                            {{ post.youtube_link }}
-                    </strong>
+                <td>{{ post.youtube_link }}</td>
                 {% else %}
-                    shut up! no youtube for you
-                </strong>
-                    </p>
-            {% endif %}
-            <p>{{ post.created }}</p>
-        </div>
+                <td>shut up! no youtube for you</td>
+                {% endif %}
+                <td><a class="btn btn-default" href="{% url 'edit' pk=post.pk %}"><span class="glyphicon glyphicon-pencil"></span></a></td>
+            </tr>
+          {% endfor %}
+            </tbody>
+        </table>
+    </div>
 
-    {% endfor %}
 </body>
 </html>
