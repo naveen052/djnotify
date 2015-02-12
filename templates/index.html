@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
+{% load staticfiles %}
 <head lang="en">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}" />
     <meta charset="UTF-8">
     <title>{{ title }}</title>
 </head>
@@ -8,12 +10,28 @@
 
     {% for post in posts %}
 
-        <div style="margin: 20px auto;padding: 20px 10px; border-bottom: 1px
+        <div class="container" style="margin: 20px auto;padding: 20px 10px;
+        border-bottom: 1px
         solid #ddd;">
-            <strong>Title : </strong>{{ post.post_title }}<br>
-            <strong>Body : </strong>{{ post.post_body }}<br>
-            <strong>Youtube </strong>{{ post.youtube_link }}<br>
-            <strong>Created at : </strong> {{ post.created }}
+        <div class="form-group">
+            <select class="form-control" id="select">
+                {% for user in all_users %}
+                  <option>{{ user.username }}</option>
+                {% endfor %}
+            </select>
+        </div>
+            <h2>{{ post.post_title }}</h2>
+            <p>{{ post.post_body }}</p>
+            <p><strong>
+                {% if post.youtube_link %}
+                            {{ post.youtube_link }}
+                    </strong>
+                {% else %}
+                    shut up! no youtube for you
+                </strong>
+                    </p>
+            {% endif %}
+            <p>{{ post.created }}</p>
         </div>
 
     {% endfor %}
