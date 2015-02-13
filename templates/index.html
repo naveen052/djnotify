@@ -32,8 +32,11 @@
                 {% else %}
                 <td>shut up! no youtube for you</td>
                 {% endif %}
-                <td><a class="btn btn-default" href="{% url 'edit' pk=post.pk %}"><span class="glyphicon glyphicon-pencil"></span></a></td>
-                <td>{{ post.picture }}</td>
+                <td>
+                    <a class="btn btn-default" href="{% url 'edit' pk=post.pk %}">
+                        edit</a>
+                    <a class="btn btn-default" href="{% url 'delete' pk=post.pk %}">
+                        delete</a></td>
             </tr>
           {% endfor %}
             </tbody>

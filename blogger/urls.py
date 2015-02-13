@@ -15,4 +15,7 @@ urlpatterns = patterns('',
                        url(r'^(?P<pk>[0-9]+)/edit/$',
                            'content.views.edit_post',
                            name='edit'),
+                       url(r'^delete/(?P<pk>[0-9]+)$',
+                           'content.views.delete_post',
+                           name='delete'),
 )
