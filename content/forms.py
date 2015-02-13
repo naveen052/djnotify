@@ -10,4 +10,4 @@ class BlogForm(forms.ModelForm):
         super(BlogForm, self).__init__(*args, **kwargs)
         self.fields['post_title'].widget.attrs.update({'class': 'form-control'})
         self.fields['post_body'].widget.attrs.update({'class': 'form-control'})
-        self.fields['youtube_link'].widget.attrs.update({'class': 'form-control'})
+        self.fields['post_title'].widget.attrs.update({'class': 'form-control'})
