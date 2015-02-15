@@ -1,8 +1,10 @@
 from django.contrib.auth.decorators import permission_required
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render_to_response, render, get_object_or_404, redirect
+from django.template import RequestContext
 from django.views.generic import View
 
 from content.forms import BlogForm
+
 from content.models import BlogContent
 
 
@@ -16,8 +18,6 @@ class PostList(View):
         return render(request, self.template_name, context)
 
 
-
-@permission_required('/', login_url='/admin/login/')
 def add_content(request):
 
     if request.method == "POST":
@@ -25,7 +25,6 @@ def add_content(request):
         if form.is_valid():
             post = form.save(commit=False)
             post.save()
-            return redirect('blog.views.PostList', pk=post.pk)
     else:
         form = BlogForm()
     return render(request, 'form.html', {'form': form})
@@ -43,7 +42,6 @@ def edit_post(request, pk):
         form = BlogForm(request.POST, instance=post)
         if form.is_valid():
             post = form.save(commit=False)
-            post.author = request.user
             post.save()
             return redirect('content.views.PostList', pk=post.pk)
     else:
