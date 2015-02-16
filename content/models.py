@@ -15,3 +15,12 @@ class BlogContent(models.Model):
 
     def __unicode__(self):
         return self.post_title
+
+
+class PostTypeVideo(models.Model):
+    video_post_title = models.CharField(max_length=150, blank=False, null=False)
+    video_post_url = models.URLField(max_length=200,  blank=True, null=True)
+    video_post_media = models.FileField(upload_to='uploads/', null=False)
+
+    def __unicode__(self):
+        return self.video_post_title, self.video_post_url

@@ -1,14 +1,5 @@
-<!DOCTYPE html>
-<html>
-{% load staticfiles %}
-<head lang="en">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}" />
-    <meta charset="UTF-8">
-    <title>{{ title }}</title>
-</head>
-<body>
-
-
+{% extends "base.html" %}
+{% block main %}
     <div class="container" id="preview-content">
     <a class="btn btn-default" href="{% url 'add_content' %}">
                         AddPost</a>
@@ -48,6 +39,5 @@
         </table>
     </div>
 
-</body>
-</html>
+{% endblock %}
 <!--<td><iframe src="{{ MEDIA_URL }}{{ post.image }}" width="200px" height="300px"  /></td>-->

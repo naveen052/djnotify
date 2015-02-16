@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block main %}
+
+    <div class="container" id="preview-content">
+    <a class="btn btn-default" href="{% url 'add_video' %}">
+                        Add Video Post</a>
+        <table class="table table-striped table-hover ">
+          <thead>
+            <tr>
+              <th>Title</th>
+              <th>Body</th>
+              <th>Youtube Link</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+          {% for post in posts %}
+            <tr>
+                <td>{{ post.video_post_title }}</td>
+                <td class="another-img">
+                    <video width="400" controls>
+                     <source src="{{ MEDIA_URL }}{{ post.video_post_media }}" >
+                    </video>
+                </td>
+                {% if post.video_post_url %}
+                <td>{{ post.video_post_url }}</td>
+                {% else %}
+                <td>shut up! no youtube for you</td>
+                {% endif %}
+            <td>
+                    <a class="btn btn-default" href="{% url 'edit_video' pk=post.pk %}">
+                        edit</a>
+                    <a class="btn btn-default" href="{% url 'delete_video' pk=post.pk %}">
+                        delete</a>
+                </td>
+
+            </tr>
+          {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+{% endblock %}
