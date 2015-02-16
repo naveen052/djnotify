@@ -6,6 +6,7 @@
     <script>tinymce.init({selector:"textarea",plugins: ["image","preview", "media"]});</script>
     <link rel="stylesheet" href={% static 'css/style.css' %} />
     <meta charset="UTF-8">
+    <title>{% block meta_title %}{% endblock %} | Content Delivery</title>
 </head>
 <body>
 {% block main %}

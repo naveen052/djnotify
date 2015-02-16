@@ -16,7 +16,8 @@ class PostList(View):
 
     def get(self, request, *args, **kwargs):
         context = {
-            "posts": BlogContent.objects.all().order_by('-created')
+            "posts": BlogContent.objects.all().order_by('-created'),
+            "title": "Latest Posts"
         }
         return render(request, self.template_name, context)
 
@@ -29,7 +30,7 @@ def add_content(request):
         return HttpResponseRedirect('/')
     else:
         form = BlogForm()
-    return render(request, 'form.html', {'form': form})
+    return render(request, 'form.html', {'form': form, 'title': "Add Post"})
 
 
 def delete_post(request, pk):
@@ -48,7 +49,7 @@ def edit_post(request, pk):
             return redirect('content.views.PostList', pk=post.pk)
     else:
         form = BlogForm(instance=post)
-    return render(request, 'edit.html', {'form': form})
+    return render(request, 'edit.html', {'form': form, 'title': "Edit Post"})
 
 
 # ----------------------Video Post---------------------------------------------------------
@@ -61,7 +62,7 @@ def add_post_type_video(request):
         return HttpResponseRedirect('/')
     else:
         video_form = PostTypeVideoForm()
-    return render(request, 'video_form.html', {'form': video_form})
+    return render(request, 'video_form.html', {'form': video_form, 'title': "Add Video Post"})
 
 
 class VideoTypePostList(View):
@@ -69,7 +70,8 @@ class VideoTypePostList(View):
 
     def get(self, request, *args, **kwargs):
         context = {
-            "posts": PostTypeVideo.objects.all()
+            "posts": PostTypeVideo.objects.all(),
+            "title": "Your Videos"
         }
         return render(request, self.template_name, context)
 
@@ -90,5 +92,5 @@ def edit_video_post(request, pk):
             return redirect('/video', pk=post.pk)
     else:
         form = PostTypeVideoForm(instance=post)
-    return render(request, 'edit_video.html', {'form': form})
+    return render(request, 'edit_video.html', {'form': form, 'title': "Edit Video post"})
 
