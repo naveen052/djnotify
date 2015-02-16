@@ -1,10 +1,7 @@
-from django.contrib.auth.decorators import permission_required
-from django.shortcuts import render_to_response, render, get_object_or_404, redirect
-from django.template import RequestContext
+from django.http import HttpResponseRedirect
+from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import View
-
 from content.forms import BlogForm
-
 from content.models import BlogContent
 
 
@@ -21,10 +18,9 @@ class PostList(View):
 def add_content(request):
 
     if request.method == "POST":
-        form = BlogForm(request.POST)
-        if form.is_valid():
-            post = form.save(commit=False)
-            post.save()
+        form = BlogForm(request.POST, request.FILES)
+        form.save()
+        return HttpResponseRedirect('/')
     else:
         form = BlogForm()
     return render(request, 'form.html', {'form': form})

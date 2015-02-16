@@ -10,6 +10,8 @@
 
 
     <div class="container">
+    <a class="btn btn-default" href="{% url 'add_content' %}">
+                        AddPost</a>
         <table class="table table-striped table-hover ">
           <thead>
             <tr>
@@ -18,7 +20,7 @@
               <th>Body</th>
               <th>Youtube Link</th>
               <th>Edit</th>
-              <td>Picture</td>
+              <th>Picture</th>
             </tr>
           </thead>
           <tbody>
@@ -37,6 +39,7 @@
                         edit</a>
                     <a class="btn btn-default" href="{% url 'delete' pk=post.pk %}">
                         delete</a></td>
+                <td><img src="{{ MEDIA_URL }}{{ post.image }}" alt=""/></td>
             </tr>
           {% endfor %}
             </tbody>
