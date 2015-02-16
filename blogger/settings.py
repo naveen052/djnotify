@@ -38,6 +38,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'content',
+    'tinymce',
     'django_extensions',
 )
 
@@ -55,6 +56,15 @@ ROOT_URLCONF = 'blogger.urls'
 
 WSGI_APPLICATION = 'blogger.wsgi.application'
 
+TINYMCE_JS_URL = 'http://tinymce.cachefly.net/4.1/tinymce.min.js'
+TINYMCE_DEFAULT_CONFIG = {
+    'plugins': "table,spellchecker,paste,searchreplace,preview",
+    'theme': "advanced",
+    'cleanup_on_startup': True,
+    'custom_undo_redo_levels': 10,
+}
+TINYMCE_SPELLCHECKER = True
+TINYMCE_COMPRESSOR = True
 
 # Database
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases
@@ -70,7 +80,7 @@ DATABASES = {
 # https://docs.djangoproject.com/en/1.7/topics/i18n/
 
 TEMPLATE_DIRS = (
-    os.path.join(BASE_DIR,  'templates'),
+    os.path.join(BASE_DIR, 'templates'),
 )
 
 LANGUAGE_CODE = 'en-us'

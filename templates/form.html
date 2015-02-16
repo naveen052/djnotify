@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
 {% load staticfiles %}
+<script src="//tinymce.cachefly.net/4.1/tinymce.min.js"></script>
+<script>tinymce.init({selector:"textarea",plugins: ["image","preview", "media"]});</script>
 <head lang="en">
     <link rel="stylesheet" href={% static 'css/style.css' %} />
     <meta charset="UTF-8">

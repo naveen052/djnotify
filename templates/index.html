@@ -9,7 +9,7 @@
 <body>
 
 
-    <div class="container">
+    <div class="container" id="preview-content">
     <a class="btn btn-default" href="{% url 'add_content' %}">
                         AddPost</a>
         <table class="table table-striped table-hover ">
@@ -28,7 +28,7 @@
             <tr>
                 <td>{{ post.created }}</td>
                 <td>{{ post.post_title }}</td>
-                <td>{{ post.post_body }}</td>
+                <td>{{ post.post_body|safe }}</td>
                 {% if post.youtube_link %}
                 <td>{{ post.youtube_link }}</td>
                 {% else %}
@@ -38,8 +38,10 @@
                     <a class="btn btn-default" href="{% url 'edit' pk=post.pk %}">
                         edit</a>
                     <a class="btn btn-default" href="{% url 'delete' pk=post.pk %}">
-                        delete</a></td>
-                <td><img src="{{ MEDIA_URL }}{{ post.image }}" alt=""/></td>
+                        delete</a>
+                </td>
+                <td class="another-img"><img src="{{ MEDIA_URL }}{{ post.image }}" alt=""/></td>
+
             </tr>
           {% endfor %}
             </tbody>
@@ -48,3 +50,4 @@
 
 </body>
 </html>
+<!--<td><iframe src="{{ MEDIA_URL }}{{ post.image }}" width="200px" height="300px"  /></td>-->

@@ -1,7 +1,10 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404, redirect
+
 from django.views.generic import View
+
 from content.forms import BlogForm
+
 from content.models import BlogContent
 
 

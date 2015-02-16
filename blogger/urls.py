@@ -8,6 +8,7 @@ urlpatterns = patterns('',
                        # url(r'^blog/', include('blog.urls')),
 
                        url(r'^admin/', include(admin.site.urls)),
+                       (r'^tinymce/', include('tinymce.urls')),
                        url(r'^$', PostList.as_view(), name='index'),
                        url(r'^addpost/$',
                            'content.views.add_content',
