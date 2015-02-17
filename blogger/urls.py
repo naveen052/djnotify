@@ -1,6 +1,6 @@
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
-from content.views import PostList, VideoTypePostList
+from content.views import PostList, VideoTypePostList, AudioTypePostList
 
 urlpatterns = patterns('',
                        # Examples:
@@ -29,4 +29,15 @@ urlpatterns = patterns('',
                        url(r'^video/delete/(?P<pk>[0-9]+)$',
                            'content.views.delete_video_post',
                            name='delete_video'),
+                       url(r'^audio/$', AudioTypePostList.as_view(), name='audio'),
+                       url(r'^audio/add/$',
+                           'content.views.add_post_type_audio',
+                           name='add_audio'),
+                       url(r'^audio/(?P<pk>[0-9]+)/edit/$',
+                           'content.views.edit_audio_post',
+                           name='edit_audio'),
+                       url(r'^audio/delete/(?P<pk>[0-9]+)$',
+                           'content.views.delete_audio_post',
+                           name='delete_audio'),
+
 )

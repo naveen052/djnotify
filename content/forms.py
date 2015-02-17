@@ -1,5 +1,5 @@
 from django import forms
-from content.models import BlogContent, PostTypeVideo
+from content.models import BlogContent, PostTypeVideo, PostTypeAudio
 
 
 class BlogForm(forms.ModelForm):
@@ -23,3 +23,14 @@ class PostTypeVideoForm(forms.ModelForm):
         self.fields['video_post_title'].widget.attrs.update({'class': 'form-control'})
         self.fields['video_post_url'].widget.attrs.update({'class': 'form-control'})
         self.fields['video_post_media'].widget.attrs.update({'class': 'form-control'})
+
+
+class PostTypeAudioForm(forms.ModelForm):
+    class Meta:
+        model = PostTypeAudio
+
+    def __init__(self, *args, **kwargs):
+        super(PostTypeAudioForm, self).__init__(*args, **kwargs)
+        self.fields['audio_post_title'].widget.attrs.update({'class': 'form-control'})
+        self.fields['audio_post_url'].widget.attrs.update({'class': 'form-control'})
+        self.fields['audio_post_media'].widget.attrs.update({'class': 'form-control'})

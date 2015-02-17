@@ -3,9 +3,9 @@ from django.shortcuts import render, get_object_or_404, redirect
 
 from django.views.generic import View
 
-from content.forms import BlogForm, PostTypeVideoForm
+from content.forms import BlogForm, PostTypeVideoForm, PostTypeAudioForm
 
-from content.models import BlogContent, PostTypeVideo
+from content.models import BlogContent, PostTypeVideo, PostTypeAudio
 
 
 # ----------------------------Normal Post---------------------------------------------------
@@ -93,4 +93,47 @@ def edit_video_post(request, pk):
     else:
         form = PostTypeVideoForm(instance=post)
     return render(request, 'edit_video.html', {'form': form, 'title': "Edit Video post"})
+
+
+# ----------------------Video Post---------------------------------------------------------
+
+
+def add_post_type_audio(request):
+    if request.method == "POST":
+        audio_form = PostTypeAudioForm(request.POST, request.FILES)
+        audio_form.save()
+        return HttpResponseRedirect('/')
+    else:
+        audio_form = PostTypeAudioForm()
+    return render(request, 'audio_form.html', {'form': audio_form, 'title': "Add Audio Post"})
+
+
+class AudioTypePostList(View):
+    template_name = 'audio.html'
+
+    def get(self, request, *args, **kwargs):
+        context = {
+            "posts": PostTypeAudio.objects.all(),
+            "title": "Your Audio Clips"
+        }
+        return render(request, self.template_name, context)
+
+
+def delete_audio_post(request, pk):
+    post = get_object_or_404(PostTypeAudio, pk=pk)
+    post.delete()
+    return redirect('/', pk=post.pk)
+
+
+def edit_audio_post(request, pk):
+    post = get_object_or_404(PostTypeAudio, pk=pk)
+    if request.method == "POST":
+        form = PostTypeAudioForm(request.POST, instance=post)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.save()
+            return redirect('/video', pk=post.pk)
+    else:
+        form = PostTypeVideoForm(instance=post)
+    return render(request, 'edit_audio.html', {'form': form, 'title': "Edit Audio post"})
 

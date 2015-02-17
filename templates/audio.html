@@ -3,7 +3,7 @@
 {% block main %}
 
     <div class="container" id="preview-content">
-        <div class="col-md-12" style="text-align: center;padding: 20px 0px;">
+        <div class="col-md-12" style="text-align: center;padding: 20px 0;">
 
     <a class="btn btn-default" href="{% url 'add_content' %}">
                         AddPost</a>
@@ -17,24 +17,24 @@
           <thead>
             <tr>
               <th>Title</th>
-              <th>Local Video Media</th>
-              <th>Youtube Link</th>
+              <th>Audio</th>
+              <th>Optional Link</th>
               <th>Actions</th>
             </tr>
           </thead>
           <tbody>
           {% for post in posts %}
             <tr>
-                <td>{{ post.video_post_title }}</td>
+                <td>{{ post.audio_post_title }}</td>
                 <td class="another-img">
-                    <video width="400" controls>
-                     <source src="{{ MEDIA_URL }}{{ post.video_post_media }}" >
-                    </video>
+                    <audio controls>
+                     <source type="audio/mpeg" src="{{ MEDIA_URL }}{{ post.audio_post_media }}" >
+                    </audio>
                 </td>
-                {% if post.video_post_url %}
-                <td>{{ post.video_post_url }}</td>
+                {% if post.audio_post_url %}
+                <td>{{ post.audio_post_url }}</td>
                 {% else %}
-                <td>shut up! no youtube for you</td>
+                <td>this post has no audio url</td>
                 {% endif %}
             <td>
                     <a class="btn btn-default" href="{% url 'edit_video' pk=post.pk %}">

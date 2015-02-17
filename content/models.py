@@ -24,3 +24,12 @@ class PostTypeVideo(models.Model):
 
     def __unicode__(self):
         return self.video_post_title, self.video_post_url
+
+
+class PostTypeAudio(models.Model):
+    audio_post_title = models.CharField(max_length=150, blank=False, null=False)
+    audio_post_url = models.URLField(max_length=200,  blank=True, null=True)
+    audio_post_media = models.FileField(upload_to='uploads/', null=False)
+
+    def __unicode__(self):
+        return self.audio_post_title, self.audio_post_url

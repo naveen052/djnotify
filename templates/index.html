@@ -2,8 +2,16 @@
  {% block meta_title %}{{ title }}{% endblock %}
 {% block main %}
     <div class="container" id="preview-content">
+        <div class="col-md-12" style="text-align: center;padding: 20px 0px;">
+
     <a class="btn btn-default" href="{% url 'add_content' %}">
                         AddPost</a>
+
+    <a class="btn btn-default" href="{% url 'add_video' %}">
+                        Add Video Post</a>
+    <a class="btn btn-default" href="{% url 'add_audio' %}">
+                        Add Audio Post</a>
+        </div>
         <table class="table table-striped table-hover ">
           <thead>
             <tr>

@@ -1,10 +1,10 @@
 {% extends "base.html" %}
  {% block meta_title %}{{ title }}{% endblock %}
 {% block main %}
-    <div class="container" style="margin: 20px auto;width: 80%;">
+    <div class="container" style="margin: 20px auto;">
         <div class="jumbotron">
-            <h1>Add normal post</h1>
-                <form action="" method="post" enctype="multipart/form-data" class="form-horizontal">
+            <h1>Edit audio</h1>
+                <form action="" method="post" class="form-horizontal">
                  <div class="form-group">
                             {% csrf_token %}
                             {{ form }}
@@ -15,5 +15,4 @@
                 </form>
         </div>
     </div>
-
 {% endblock %}
