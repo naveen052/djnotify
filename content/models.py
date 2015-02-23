@@ -1,5 +1,6 @@
 from django.db import models
 from tinymce import models as tinymce_models
+from autoslug import AutoSlugField
 # Create your models here.
 
 
@@ -8,7 +9,8 @@ class BlogContent(models.Model):
     post_body = tinymce_models.HTMLField()
     youtube_link = models.URLField(max_length=200,  blank=True, null=True)
     created = models.DateTimeField(auto_now_add=True)
-    image = models.FileField(upload_to='uploads/', null=False)
+    image = models.FileField(upload_to='uploads/', null=True)
+    category = models.ForeignKey('content.Category')
 
     def get_file_path(self):
         return u'%s' % self.image
@@ -33,3 +35,11 @@ class PostTypeAudio(models.Model):
 
     def __unicode__(self):
         return self.audio_post_title, self.audio_post_url
+
+
+class Category(models.Model):
+    title = models.CharField(max_length=100, db_index=True)
+    slug = AutoSlugField(populate_from='title', max_length=500)
+
+    def __unicode__(self):
+        return '%s' % self.title

@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+ {% block meta_title %}{{ title }}{% endblock %}
+{% block main %}
+    <div class="container" style="margin: 20px auto;width: 80%;">
+        <div class="jumbotron">
+            {% if post %}
+                <p>{{ post.post_title }}</p>
+                {{ post.post_body| safe }}
+                <p>{{ post.category }}</p>
+            {% else %}
+                <p>There are no posts.</p>
+            {% endif %}
+        </div>
+    </div>
+
+{% endblock %}

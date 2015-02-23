@@ -1,11 +1,11 @@
 from django.http import HttpResponseRedirect
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import render, get_object_or_404, redirect, render_to_response
 
 from django.views.generic import View
 
-from content.forms import BlogForm, PostTypeVideoForm, PostTypeAudioForm
+from content.forms import BlogForm, PostTypeVideoForm, PostTypeAudioForm, AddCategoryForm
 
-from content.models import BlogContent, PostTypeVideo, PostTypeAudio
+from content.models import BlogContent, PostTypeVideo, PostTypeAudio, Category
 
 
 # ----------------------------Normal Post---------------------------------------------------
@@ -14,7 +14,7 @@ from content.models import BlogContent, PostTypeVideo, PostTypeAudio
 class PostList(View):
     template_name = 'index.html'
 
-    def get(self, request, *args, **kwargs):
+    def get(self, request):
         context = {
             "posts": BlogContent.objects.all().order_by('-created'),
             "title": "Latest Posts"
@@ -26,17 +26,47 @@ def add_content(request):
 
     if request.method == "POST":
         form = BlogForm(request.POST, request.FILES)
-        form.save()
-        return HttpResponseRedirect('/')
+        if form.is_valid():
+            form = form.save(commit=False)
+            form.save()
+            return HttpResponseRedirect('/')
+        else:
+            form = BlogForm()
     else:
         form = BlogForm()
     return render(request, 'form.html', {'form': form, 'title': "Add Post"})
+
+
+def add_category(request):
+
+    if request.method == "POST":
+        form = AddCategoryForm(request.POST, request.FILES)
+        form.save()
+        return HttpResponseRedirect('/')
+    else:
+        form = AddCategoryForm()
+    return render(request, 'category.html', {'form': form, 'title': "Add Category"})
+
+
+def view_category(request, slug):
+    category = get_object_or_404(Category, slug=slug)
+    return render_to_response('view_category.html', {
+        'category': category,
+        'title': "Viewing post for category",
+        'posts': BlogContent.objects.filter(category=category)[:5]
+    })
 
 
 def delete_post(request, pk):
     post = get_object_or_404(BlogContent, pk=pk)
     post.delete()
     return redirect('/', pk=post.pk)
+
+
+def view_post(request, pk):
+    return render_to_response('single_post.html', {
+        'post': get_object_or_404(BlogContent, pk=pk)
+    })
 
 
 def edit_post(request, pk):
